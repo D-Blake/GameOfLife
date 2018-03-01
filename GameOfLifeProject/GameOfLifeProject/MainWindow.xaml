@@ -1,0 +1,118 @@
+﻿<Window x:Class="GameOfLifeProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameOfLifeProject"
+        xmlns:conv="clr-namespace:GameOfLifeProject.Converters"
+        mc:Ignorable="d"
+        Background="Black"
+        ResizeMode="NoResize"
+        Title="GameOfLifeWindow" Height="350" Width="525">
+
+    <Grid>
+        <!--<Grid Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border VerticalAlignment="Center" Grid.ColumnSpan="3"  
+                    HorizontalAlignment="Center" Grid.Row="0" 
+                    BorderBrush="CornflowerBlue" BorderThickness="10"
+                    CornerRadius="5">
+
+                <Label Content="Please select a size for your game" 
+                       FontFamily="Arial Rounded MT Bold" FontSize="24"
+                       Foreground="Black"
+                       Background="CornflowerBlue"
+                       Margin="10"/>
+
+            </Border>
+
+            <Button Background="CornflowerBlue" Height="50" Width="100" Content="10" Grid.Row="2" Grid.Column="0"/>
+            <Button Background="CornflowerBlue" Height="50" Width="100" Content="50" Grid.Row="2" Grid.Column="1"/>
+            <Button Background="CornflowerBlue" Height="50" Width="100" Content="100" Grid.Row="2" Grid.Column="2"/>
+
+        </Grid>-->
+
+        <Grid Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="1" BorderBrush="Ivory" BorderThickness="5">
+                <StackPanel VerticalAlignment="Bottom" Margin="10">
+                    
+                    <!-- Slider to determine how fast the generations should occur -->
+                    <Grid x:Name="throttleGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Throttle" Foreground="White"/>
+                        <Label Foreground="White" Grid.Column="1" Content="{Binding Path=Throttle}"/>
+                    </Grid>
+                    <Slider x:Name="throttleSlider" Minimum="0" Maximum="1000" SmallChange="100" Value="{Binding Path=Throttle, Mode=TwoWay}">
+                        <Slider.ToolTip>
+                            <ToolTip Content="{Binding Path=Throttle}"/>
+                        </Slider.ToolTip>
+                    </Slider>
+
+                    <!-- Slider to determine the new X of the new grid when the New Grid button is pressed -->
+                    <Grid x:Name="XGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="X Slider" Foreground="White"/>
+                        <Label Foreground="White" Grid.Column="1" Content="{Binding Path=GridX}"/>
+                    </Grid>
+                    <Slider x:Name="xSlider" Minimum="10" Maximum="100" SmallChange="1" Value="{Binding Path=GridX, Mode=TwoWay}">
+                        <Slider.ToolTip>
+                            <ToolTip Content="{Binding Path=GridX}"/>
+                        </Slider.ToolTip>
+                    </Slider>
+                    
+                    <!-- Slider to determine the new Y of the new grid when the New Grid button is pressed -->
+                    <Grid x:Name="YGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Y Slider" Foreground="White"/>
+                        <Label Foreground="White" Grid.Column="1" Content="{Binding Path=GridY}"/>
+                    </Grid>
+                    <Slider x:Name="ySlider" Minimum="10" Maximum="100" SmallChange="1" Margin="0, 0, 0, 5" Value="{Binding Path=GridY, Mode=TwoWay}">
+                        <Slider.ToolTip>
+                            <ToolTip Content="{Binding Path=GridX}"/>
+                        </Slider.ToolTip>
+                    </Slider>
+
+                    <!-- Buttons for the User Controls -->
+                    <Button Background="RoyalBlue"  x:Name="NewGridButton" Margin="5"  Content="New Grid" VerticalAlignment="Bottom" Width="70" Height="20" Click="NewGridButton_Click"/>
+                    <Button Background="RoyalBlue" x:Name="OneStepButton" Margin="5"  Content="One Step" VerticalAlignment="Bottom" Width="70" Height="20" Click="OneStepButton_Click"/>
+                    <Button Background="RoyalBlue" x:Name="PlayButton" Margin="5"  Content="Play" VerticalAlignment="Bottom" Width="70" Height="20" Click="PlayButton_Click"/>
+                    <Button Background="RoyalBlue" x:Name="PauseButton" Margin="5"  Content="Pause" VerticalAlignment="Bottom" Width="70" Height="20" Click="PauseButton_Click"/>
+                    <Button Background="RoyalBlue" x:Name="RandomButton" Margin="5"  Content="Random" VerticalAlignment="Bottom" Width="70" Height="20" Click="RandomButton_Click"/>
+
+                </StackPanel>
+            </Border>
+
+            <!-- The grid in which the cells will be automatically assigned to once created -->
+            <UniformGrid x:Name="playGrid" Grid.Column="0">
+            </UniformGrid>
+
+        </Grid>
+    </Grid>
+</Window>
